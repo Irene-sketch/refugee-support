@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Refugee Support - Login/Signup</title>
+    <title>Login</title>
     <style>
         body {
             font-family: sans-serif;
@@ -10,56 +10,60 @@
             align-items: center;
             height: 100vh;
             margin: 0;
-            background-color: #f4f4f4;
+            background-image: url('war_refuge.jpg'); /* Replace with your image path */
+            background-size: cover; /* Cover the entire viewport */
+            background-repeat: no-repeat; /* Prevent image repetition */
+            background-position: center center; /* Center the image */
         }
 
         .container {
-            width: 350px; /* Increased width */
-            padding: 30px; /* Increased padding */
-            background-color: #fff;
-            border-radius: 10px; /* Increased border radius */
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15); /* More pronounced shadow */
+            width: 350px;
+            padding: 50px;
+            background-color: rgba(255, 255, 255, 0.9); /* Semi-transparent white */
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
         }
 
         h2 {
             text-align: center;
-            margin-bottom: 25px; /* Increased margin */
-            color: #333;
+            margin-bottom: 25px;
+            color: #fc9343;
+            font-size: 30px;
         }
 
         .form-group {
-            margin-bottom: 20px; /* Increased margin */
+            margin-bottom: 20px;
         }
 
         .form-group label {
             display: block;
-            margin-bottom: 8px; /* Increased margin */
+            margin-bottom: 8px;
             color: #555;
             font-weight: bold;
         }
 
         .form-group input {
-            width: calc(100% - 22px); /* Adjusted width for padding */
-            padding: 12px; /* Increased padding */
+            width: calc(100% - 22px);
+            padding: 12px;
             border: 1px solid #ddd;
-            border-radius: 6px; /* Increased border radius */
+            border-radius: 6px;
             font-size: 16px;
         }
 
         .form-group button {
-            width: 48%; /* Adjust for space between buttons */
-            padding: 12px 20px; /* Increased padding */
+            width: 48%;
+            padding: 12px 20px;
             background-color: #fc9343;
             color: white;
             border: none;
-            border-radius: 6px; /* Increased border radius */
+            border-radius: 6px;
             cursor: pointer;
             font-size: 16px;
-            transition: background-color 0.3s ease; /* Smooth hover effect */
+            transition: background-color 0.3s ease;
         }
 
         .form-group button:hover {
-            background-color: #f2802a; /* Darker orange on hover */
+            background-color: #f2802a;
         }
 
         .error-message {
@@ -70,7 +74,7 @@
 
         .button-container {
             display: flex;
-            justify-content: space-between; /* Space between buttons */
+            justify-content: space-between;
         }
     </style>
     <script src="https://www.gstatic.com/firebasejs/9.6.1/firebase-app-compat.js"></script>
@@ -96,15 +100,16 @@
     </div>
 
     <script>
-        // ... (Your existing JavaScript code) ...
+
         const firebaseConfig = {
-            apiKey: "AIzaSyDfcdVNNZdqFD1byZ3lFBuxZB0aFf_HLQA",
-            authDomain: "login-example-9265c.firebaseapp.com",
-            projectId: "login-example-9265c",
-            storageBucket: "login-example-9265c.firebasestorage.app",
-            messagingSenderId: "208602919387",
-            appId: "1:208602919387:web:55381dc9a31c28c697b7fe"
+        apiKey: "AIzaSyCcoozZQWTAI_1g_E0tjlXk6dateBJCeU0",
+        authDomain: "refugee-support-26a83.firebaseapp.com",
+        projectId: "refugee-support-26a83",
+        storageBucket: "refugee-support-26a83.firebasestorage.app",
+        messagingSenderId: "476368770087",
+        appId: "1:476368770087:web:8d7e98f5220d7e572a6a02"
         };
+
         firebase.initializeApp(firebaseConfig);
         const auth = firebase.auth();
         const emailInput = document.getElementById('email');
