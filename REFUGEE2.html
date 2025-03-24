@@ -1,0 +1,236 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>UMEED Refugee Support</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap');
+        
+        body {
+            font-family: 'Poppins', sans-serif;
+            margin: 0;
+            padding: 0;
+            background: url('https://www.anera.org/wp-content/uploads/2018/06/Palestinian_girl_Jabalya_Refugee_Camp_Gaza.jpg') no-repeat center center fixed;
+            background-size: cover;
+            color: #333;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        header {
+            background-color: rgba(217, 119, 6, 0.9);
+            color: white;
+            text-align: center;
+            padding: 25px 0;
+            font-size: 30px;
+            font-weight: bold;
+            width: 100%;
+        }
+        .marquee {
+            background-color: rgba(255, 255, 255, 0.8);
+            color: #333;
+            padding: 10px;
+            font-size: 16px;
+            font-weight: bold;
+            width: 100%;
+            text-align: center;
+            overflow: hidden;
+            white-space: nowrap;
+        }
+        .marquee span {
+            display: inline-block;
+            animation: marquee 15s linear infinite;
+        }
+        @keyframes marquee {
+            from { transform: translateX(100%); }
+            to { transform: translateX(-100%); }
+        }
+        .grid-container {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 20px;
+            justify-content: center;
+            padding: 20px;
+            max-width: 600px;
+        }
+        .section {
+            background-color: rgba(240, 240, 240, 0.7);
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.1);
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            width: 250px;
+            height: 250px;
+            text-align: center;
+        }
+
+
+         .who-is-refugee, .about-us {
+            background-color: rgba(240, 240, 240, 0.7);
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.1);
+            text-align: center;
+            width: 80%;
+            margin: 20px 0;}
+           
+ .contact-us {
+            background-color: rgba(240, 240, 240, 0.7);
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.1);
+            text-align: center;
+            width: 100%;
+            margin: 20px 0;
+        }
+        .news-container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            width: 80%;
+            padding: 20px;
+            gap: 20px;
+        }
+        .news-heading {
+            font-size: 24px;
+            font-weight: bold;
+            text-align: center;
+            margin-bottom: 10px;
+        }
+        .news-box-container {
+            display: flex;
+            justify-content: space-between;
+            width: 100%;
+            gap: 20px;
+        }
+        .news-box {
+            background-color: rgba(255, 255, 255, 0.7);
+            padding: 15px;
+            border-radius: 10px;
+            width: 48%;
+            box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.1);
+            text-align: center;
+            color: black;
+        }
+        .india-news {
+            background: linear-gradient(
+                rgba(255, 153, 51, 0.5),
+                rgba(255, 255, 255, 0.5),
+                rgba(19, 136, 8, 0.5)
+            );
+            padding: 20px;
+            border-radius: 10px;
+        }
+        .gaza-news {
+            background-image: url('https://upload.wikimedia.org/wikipedia/commons/0/00/Flag_of_Palestine.svg');
+            background-size: cover;
+            background-position: center;
+            padding: 20px;
+            border-radius: 10px;
+            opacity: 0.5;
+        }
+        .news-image {
+            width: 100%;
+            height: auto;
+            border-radius: 10px;
+            margin-top: 10px;
+        }
+        .about-us {
+            background-color: rgba(240, 240, 240, 0.7);
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.1);
+            text-align: center;
+            width: 100%;
+            margin: 20px 0;
+        }
+        .footer {
+            background-color: rgba(217, 119, 6, 0.9);
+            color: white;
+            text-align: center;
+            padding: 10px 0;
+            width: 100%;
+        }
+.nav-links {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            padding: 15px;
+            background-color: rgba(255, 255, 255, 0.9);
+            width: 100%;
+        }
+    </style>
+</head>
+<body>
+    <header>UMEED Refugee Support</header>
+    <div class="marquee">
+        <span>Providing essential aid, legal support, job opportunities, and information for refugees | Established 2025</span>
+    </div>
+<div class="nav-links">
+        <a href="#about">About Us</a>
+        <a href="#faq">FAQs</a>
+        <a href="#contact">Contact Us</a>
+        <a href="login.html">Login </a>
+    </div>
+    <div class="grid-container">
+        <div class="section">
+            <h2>🤖 AI Chatbot</h2>
+            <p>Get instant support and answers to your questions using our AI-powered chatbot.</p>
+        </div>
+        <div class="section">
+            <h2>⚖️ Law & Job Info Hub</h2>
+            <p>Find legal assistance and job opportunities tailored for refugees.</p>
+        </div>
+        <div class="section">
+            <h2>🍲 Food & Medical Aid Locator</h2>
+            <p>Locate food banks and medical aid services near you.</p>
+        </div>
+        <div class="section">
+            <h2>📰 Latest Reports on Refugees</h2>
+            <p>Stay updated with the latest reports on refugees in India and Gaza from reputable newspapers.</p>
+        </div>
+    </div>
+    <div class="news-container">
+        <div class="news-heading">Latest Reports</div>
+        <div class="news-box-container">
+            <div class="news-box india-news">
+                <h3>Refugee Crisis in India</h3>
+                <p><strong>Recent Headline:</strong> [Insert India's latest news headline here]</p>
+            </div>
+            <div class="news-box gaza-news">
+                <h3>Refugee Crisis in Gaza</h3>
+                <p><strong>Recent Headline:</strong> [Insert Gaza's latest news headline here]</p>
+            </div>
+        </div>
+    </div>
+ <div class="who-is-refugee">
+        <h2>Who is a Refugee?</h2>
+        <p>The 1951 convention defines a refugee as a “person who is outside his or her country of nationality or habitual residence; has a well-founded fear of being persecuted because of his or her race, religion, nationality, membership of a particular social group or political opinion; and is unable or unwilling to avail him— or herself of the protection of that country, or to return there, for fear of persecution.”</p>
+    </div>
+<div class="contact-us" id="contact">
+        <h2>Contact Us</h2>
+        <p>Email: support@umeed.org     |    Phone: +91 12345 67890    |    Adress: 123 Refugee Aid Street, Delhi, India </p>
+           </div>
+    <div class="contact-us" id="faq">
+        <h2>Frequently Asked Questions</h2>
+        <p><strong>Q: How can I apply for refugee aid?</strong></p>
+        <p>A: You can visit our Law & Job Info Hub to find details on eligibility and application processes.</p>
+        <p><strong>Q: What are my rights as a refugee?</strong></p>
+        <p>A: As a refugee, you have the right to seek asylum, to be protected from being sent back to a country where you are at risk, and to have access to basic necessities like food, shelter, and healthcare.</p>
+        <p><strong>Q: Who is eligible for resettlement?</strong> </p>
+        <p>A: Resettlement is generally offered to refugees who are in dire circumstances and who are unable to return to their home country or find a safe solution in another country.
+How do I apply for resettlement? </P>
+        <P><strong>Q: How do I apply for resettlement?</strong> </P>
+        <P>A: You typically do not apply for resettlement directly, but rather, UNHCR or other organizations identify individuals who are in need of resettlement and refer them to resettlement countries. </P>
+    </div>
+    <div class="about-us" id="about-us">
+        <h2>About Us</h2>
+        <p>"UMEED Refugee Support exists to build bridges between refugees and the resources they need to rebuild their lives. This website is meant to be a place to find necessary aid, get legal and job information, and to have a starting point for any questions that a refugee may have. By use of an AI chatbot, and by gathering crucial information, we are aiming to create a helpful space for those in need."</p>
+    </div>
+    <div class="footer">&copy; 2025 UMEED Refugee Support | Helping Hands, Brighter Futures</div>
+</body>
+</html>
