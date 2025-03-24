@@ -14,41 +14,63 @@
         }
 
         .container {
-            width: 300px;
-            padding: 20px;
+            width: 350px; /* Increased width */
+            padding: 30px; /* Increased padding */
             background-color: #fff;
-            border-radius: 8px;
-            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            border-radius: 10px; /* Increased border radius */
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15); /* More pronounced shadow */
+        }
+
+        h2 {
+            text-align: center;
+            margin-bottom: 25px; /* Increased margin */
+            color: #333;
         }
 
         .form-group {
-            margin-bottom: 15px;
+            margin-bottom: 20px; /* Increased margin */
         }
 
         .form-group label {
             display: block;
-            margin-bottom: 5px;
+            margin-bottom: 8px; /* Increased margin */
+            color: #555;
+            font-weight: bold;
         }
 
         .form-group input {
-            width: calc(100% - 12px);
-            padding: 10px;
-            border: 1px solid #ccc;
-            border-radius: 2px;
+            width: calc(100% - 22px); /* Adjusted width for padding */
+            padding: 12px; /* Increased padding */
+            border: 1px solid #ddd;
+            border-radius: 6px; /* Increased border radius */
+            font-size: 16px;
         }
 
         .form-group button {
-            width: 100%;
-            padding: 10px;
+            width: 48%; /* Adjust for space between buttons */
+            padding: 12px 20px; /* Increased padding */
             background-color: #fc9343;
             color: white;
             border: none;
-            border-radius: 4px;
+            border-radius: 6px; /* Increased border radius */
             cursor: pointer;
+            font-size: 16px;
+            transition: background-color 0.3s ease; /* Smooth hover effect */
         }
-        .error-message{
+
+        .form-group button:hover {
+            background-color: #f2802a; /* Darker orange on hover */
+        }
+
+        .error-message {
             color: red;
-            font-size: 0.8em;
+            font-size: 0.9em;
+            margin-top: 5px;
+        }
+
+        .button-container {
+            display: flex;
+            justify-content: space-between; /* Space between buttons */
         }
     </style>
     <script src="https://www.gstatic.com/firebasejs/9.6.1/firebase-app-compat.js"></script>
@@ -67,24 +89,22 @@
             <input type="password" id="password" placeholder="Enter your password">
             <div id="password-error" class="error-message"></div>
         </div>
-        <div class="form-group">
+        <div class="form-group button-container">
             <button id="loginButton">Login</button>
             <button id="signupButton">Signup</button>
         </div>
     </div>
 
     <script>
-        // Initialize Firebase (Replace with your Firebase config)
+        // ... (Your existing JavaScript code) ...
         const firebaseConfig = {
-         apiKey: "AIzaSyDfcdVNNZdqFD1byZ3lFBuxZB0aFf_HLQA",
-         authDomain: "login-example-9265c.firebaseapp.com",
-         projectId: "login-example-9265c",
-         storageBucket: "login-example-9265c.firebasestorage.app",
-         messagingSenderId: "208602919387",
-        appId: "1:208602919387:web:55381dc9a31c28c697b7fe"
-};
-
-
+            apiKey: "AIzaSyDfcdVNNZdqFD1byZ3lFBuxZB0aFf_HLQA",
+            authDomain: "login-example-9265c.firebaseapp.com",
+            projectId: "login-example-9265c",
+            storageBucket: "login-example-9265c.firebasestorage.app",
+            messagingSenderId: "208602919387",
+            appId: "1:208602919387:web:55381dc9a31c28c697b7fe"
+        };
         firebase.initializeApp(firebaseConfig);
         const auth = firebase.auth();
         const emailInput = document.getElementById('email');
@@ -100,32 +120,30 @@
             emailError.textContent = "";
             passwordError.textContent = "";
 
-            if(!email){
-              emailError.textContent = "Please enter an email address.";
-              return;
+            if (!email) {
+                emailError.textContent = "Please enter an email address.";
+                return;
             }
-            if(!password){
-              passwordError.textContent = "Please enter a password.";
-              return;
+            if (!password) {
+                passwordError.textContent = "Please enter a password.";
+                return;
             }
 
             auth.signInWithEmailAndPassword(email, password)
                 .then((userCredential) => {
-                    // Signed in
                     const user = userCredential.user;
                     alert('Logged in successfully!');
-                    // Redirect to the main page or perform other actions
-                    window.location.href = "chatbots.html"; //replace main.html with your main page.
+                    window.location.href = "chatbots.html";
                 })
                 .catch((error) => {
                     const errorCode = error.code;
                     const errorMessage = error.message;
-                    if(errorCode === 'auth/user-not-found'){
+                    if (errorCode === 'auth/user-not-found') {
                         emailError.textContent = "User not found. Please signup.";
-                    } else if (errorCode === 'auth/wrong-password'){
+                    } else if (errorCode === 'auth/wrong-password') {
                         passwordError.textContent = "Incorrect password.";
-                    } else{
-                         emailError.textContent = errorMessage;
+                    } else {
+                        emailError.textContent = errorMessage;
                     }
                 });
         });
@@ -136,26 +154,24 @@
             emailError.textContent = "";
             passwordError.textContent = "";
 
-            if(!email){
-              emailError.textContent = "Please enter an email address.";
-              return;
+            if (!email) {
+                emailError.textContent = "Please enter an email address.";
+                return;
             }
-            if(!password){
-              passwordError.textContent = "Please enter a password.";
-              return;
+            if (!password) {
+                passwordError.textContent = "Please enter a password.";
+                return;
             }
-            if(password.length < 6){
+            if (password.length < 6) {
                 passwordError.textContent = "Password must be at least 6 characters";
                 return;
             }
 
             auth.createUserWithEmailAndPassword(email, password)
                 .then((userCredential) => {
-                    // Signed up
                     const user = userCredential.user;
                     alert('Signed up successfully!');
-                   // Redirect to the main page or perform other actions
-                   window.location.href = "chatbots.html"; //replace main.html with your main page.
+                    window.location.href = "chatbots.html";
                 })
                 .catch((error) => {
                     const errorCode = error.code;
