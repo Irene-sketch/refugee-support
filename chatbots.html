@@ -111,7 +111,7 @@
             </div>
         </div>
         <script>
-            // Firebase Configuration (Replace with your actual config)
+            // Firebase Configuration 
             const firebaseConfig = {
             apiKey: "AIzaSyCcoozZQWTAI_1g_E0tjlXk6dateBJCeU0",
             authDomain: "refugee-support-26a83.firebaseapp.com",
@@ -124,7 +124,7 @@
             firebase.initializeApp(firebaseConfig);
             const auth = firebase.auth();
             const db = firebase.firestore();
-            const API_KEY = "AIzaSyBGjm7iZ1l6wFffs5BtHy0ruHWtuBQB7Yw"; // Replace with your actual Gemini API Key
+            const API_KEY = "AIzaSyBGjm7iZ1l6wFffs5BtHy0ruHWtuBQB7Yw"; 
     
             let conversationHistory = [];
             let user;
@@ -159,7 +159,7 @@
                     }
                 } catch (error) {
                     console.error("Error loading chat history:", error);
-                    chatbox.innerHTML += `<div class="chat-message bot-message"><b>Bot:</b> Failed to load chat history.</div>`;
+                    chatbox.innerHTML += `<div class="chat-message bot-message"><b>Bot:</b>This is our first chat</div>`;
                 }
             }
     

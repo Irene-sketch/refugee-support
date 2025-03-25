@@ -10,16 +10,16 @@
             align-items: center;
             height: 100vh;
             margin: 0;
-            background-image: url('war_refuge.jpg'); /* Replace with your image path */
-            background-size: cover; /* Cover the entire viewport */
-            background-repeat: no-repeat; /* Prevent image repetition */
-            background-position: center center; /* Center the image */
+            background-image: url('war_refuge.jpg'); 
+            background-size: cover;
+            background-repeat: no-repeat; 
+            background-position: center center; 
         }
 
         .container {
             width: 350px;
             padding: 50px;
-            background-color: rgba(255, 255, 255, 0.9); /* Semi-transparent white */
+            background-color: rgba(255, 255, 255, 0.9); 
             border-radius: 10px;
             box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
         }
@@ -138,7 +138,7 @@
                 .then((userCredential) => {
                     const user = userCredential.user;
                     alert('Logged in successfully!');
-                    window.location.href = "chatbots.html";
+                    window.location.href = "index.html";
                 })
                 .catch((error) => {
                     const errorCode = error.code;
@@ -176,7 +176,7 @@
                 .then((userCredential) => {
                     const user = userCredential.user;
                     alert('Signed up successfully!');
-                    window.location.href = "chatbots.html";
+                    window.location.href = "index.html";
                 })
                 .catch((error) => {
                     const errorCode = error.code;
