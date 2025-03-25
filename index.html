@@ -3,295 +3,285 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Refugee Support - Food & Medical Aid</title>
+    <title>UMEED Refugee Support</title>
     <style>
+        @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap');
+       
         body {
-            font-family: 'Helvetica Neue', Arial, sans-serif;
+            font-family: 'Poppins', sans-serif;
             margin: 0;
             padding: 0;
-            background-image: url('data:image/jpeg;base64,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');
-            background-color: #f4f7f6;
+            background: url('https://www.anera.org/wp-content/uploads/2018/06/Palestinian_girl_Jabalya_Refugee_Camp_Gaza.jpg') no-repeat center center fixed;
+            background-size: cover;
             color: #333;
-            line-height: 1.6;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
         }
         header {
-            background-color: #ff8c00; /* Orange background for header */
-            padding: 80px 0;
+            background-color: rgba(217, 119, 6, 0.9);
+            color: white;
             text-align: center;
-            color: #fff;
-        }
-        header h1 {
-            font-size: 3.5em;
-            margin: 0;
+            padding: 25px 0;
+            font-size: 30px;
             font-weight: bold;
-            text-transform: uppercase;
+            width: 100%;
         }
-        header p {
-            font-size: 1.25em;
+        .marquee {
+            background-color: rgba(255, 255, 255, 0.8);
+            color: #333;
+            padding: 10px;
+            font-size: 16px;
+            font-weight: bold;
+            width: 100%;
+            text-align: center;
+            overflow: hidden;
+            white-space: nowrap;
+        }
+        .marquee span {
+            display: inline-block;
+            animation: marquee 15s linear infinite;
+        }
+        @keyframes marquee {
+            from { transform: translateX(100%); }
+            to { transform: translateX(-100%); }
+        }
+        .grid-container {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 20px;
+            justify-content: center;
+            padding: 20px;
+            max-width: 600px;
+        }
+        .section {
+            background-color: rgba(240, 240, 240, 0.7);
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.1);
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            width: 250px;
+            height: 250px;
+            text-align: center;
+        }
+
+
+
+
+         .who-is-refugee, .about-us {
+            background-color: rgba(240, 240, 240, 0.7);
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.1);
+            text-align: center;
+            width: 80%;
+            margin: 20px 0;}
+           
+ .contact-us {
+            background-color: rgba(240, 240, 240, 0.7);
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.1);
+            text-align: center;
+            width: 100%;
             margin: 20px 0;
         }
-        .btn {
-            background-color: #28a745;
-            color: white;
-            padding: 14px 30px;
-            font-size: 1.1em;
-            border-radius: 30px;
-            text-decoration: none;
-            display: inline-block;
-            text-transform: uppercase;
-            transition: background-color 0.3s ease;
-        }
-        .btn:hover {
-            background-color: #218838;
-        }
-        .container {
+        .news-container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
             width: 80%;
-            margin: 0 auto;
-            background-color: #fff;
-            padding: 50px 40px;
-            border-radius: 10px;
-            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
-            margin-top: -60px;
+            padding: 20px;
+            gap: 20px;
         }
-        .card {
-            background-color: white;
-            padding: 25px;
-            margin-bottom: 25px;
-            border-radius: 8px;
-            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
-            transition: transform 0.3s ease;
+        .news-heading {
+            font-size: 24px;
+            font-weight: bold;
+            text-align: center;
+            margin-bottom: 10px;
         }
-        .card:hover {
-            transform: translateY(-10px);
-        }
-        .card h3 {
-            font-size: 2em;
-            margin-top: 0;
-        }
-        .card img {
+        .news-box-container {
+            display: flex;
+            justify-content: space-between;
             width: 100%;
-            border-radius: 8px;
+            gap: 20px;
+        }
+        .news-box {
+            background-color: rgba(255, 255, 255, 0.7);
+            padding: 15px;
+            border-radius: 10px;
+            width: 48%;
+            box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.1);
+            text-align: center;
+            color: black;
+        }
+        .india-news {
+            background: linear-gradient(
+                rgba(255, 153, 51, 0.5),
+                rgba(255, 255, 255, 0.5),
+                rgba(19, 136, 8, 0.5)
+            );
+            padding: 20px;
+            border-radius: 10px;
+        }
+        .gaza-news {
+            background-image: url('https://upload.wikimedia.org/wikipedia/commons/0/00/Flag_of_Palestine.svg');
+            background-size: cover;
+            background-position: center;
+            padding: 20px;
+            border-radius: 10px;
+            opacity: 0.5;
+        }
+        .news-image {
+            width: 100%;
+            height: auto;
+            border-radius: 10px;
+            margin-top: 10px;
+        }
+        .about-us {
+            background-color: rgba(240, 240, 240, 0.7);
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.1);
+            text-align: center;
+            width: 100%;
+            margin: 20px 0;
         }
         .footer {
-            background-color: #343a40;
+            background-color: rgba(217, 119, 6, 0.9);
             color: white;
             text-align: center;
-            padding: 20px 0;
-            margin-top: 50px;
-        }
-        .footer p {
-            margin: 0;
-            font-size: 1em;
-        }
-        .hero {
-            background-color: #343a40; /* Hero section with matching dark theme */
-            color: white;
-            padding: 50px 0;
-            text-align: center;
-            margin-bottom: 50px;
-            border-radius: 10px;
-            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
-        }
-        .hero h2 {
-            font-size: 2.5em;
-            margin: 10px 0;
-            text-transform: uppercase;
-        }
-        .hero p {
-            font-size: 1.2em;
-            margin-bottom: 20px;
-        }
-        .card ul {
-            list-style-type: square;
-            padding-left: 20px;
-            margin-bottom: 20px;
-        }
-        .testimonials {
-            background-color: #f1f1f1;
-            padding: 50px 0;
-            text-align: center;
-        }
-        .testimonial {
-            margin-bottom: 20px;
-            padding: 20px;
-            background-color: #fff;
-            border-radius: 8px;
-            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
-        }
-        .testimonial p {
-            font-style: italic;
-        }
-        .testimonial .author {
-            font-weight: bold;
-        }
-        .recent-projects {
-            padding: 50px 0;
-            text-align: center;
-            background-color: #e9ecef;
-        }
-        .recent-project {
-            margin-bottom: 20px;
-        }
-        .recent-project img {
-            width: 100%;
-            height: auto;
-            border-radius: 8px;
-        }
-        .get-involved {
-            background-color: #28a745;
-            color: white;
-            padding: 50px 0;
-            text-align: center;
-        }
-        .get-involved h3 {
-            font-size: 2.5em;
-            margin-bottom: 20px;
-        }
-        .get-involved p {
-            font-size: 1.2em;
-            margin-bottom: 30px;
-        }
-        .faq {
-            padding: 50px 0;
-            text-align: center;
-            background-color: #f9f9f9;
-        }
-        .faq h2 {
-            font-size: 2.5em;
-            margin-bottom: 20px;
-        }
-        .faq ul {
-            list-style-type: none;
-            padding: 0;
-        }
-        .faq li {
-            font-size: 1.1em;
             padding: 10px 0;
-            border-bottom: 1px solid #ddd;
+            width: 100%;
         }
-        .partners {
-            padding: 50px 0;
-            background-color: #e9ecef;
-            text-align: center;
+.nav-links {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            padding: 15px;
+            background-color: rgba(255, 255, 255, 0.9);
+            width: 100%;
         }
-        .partners h2 {
-            font-size: 2.5em;
-            margin-bottom: 20px;
-        }
-        .partners img {
-            width: 100px;
-            height: auto;
-            margin: 10px;
-            border-radius: 8px;
-        }
+a{
+        color: black;
+}
     </style>
 </head>
 <body>
-
-    <header>
-        <h1>Refugee Support: Food & Medical Aid</h1>
-        <p>Empowering displaced families with essential aid, including food and medical care</p>
-    </header>
-
-    <div class="hero">
-        <h2>Make a Difference Today</h2>
-        <p>Your contribution can provide food, medicine, and hope to refugees around the world.</p>
-        <a href="#donate" class="btn">Donate Now</a>
+    <header>UMEED Refugee Support</header>
+    <div class="marquee">
+        <span>Providing essential aid, legal support, job opportunities, and information for refugees | Established 2025</span>
     </div>
-
-    <div class="container">
-        <div class="card">
-            <h3>About Our Mission</h3>
-            <p>We are a global, non-profit organization dedicated to providing life-saving food and medical assistance to refugees. With your support, we aim to improve the quality of life for displaced people and help them rebuild their future.</p>
-        </div>
-
-        <div class="card">
-            <h3>How You Can Help</h3>
-            <ul>
-                <li>Make a monetary donation to purchase food and medicine.</li>
-                <li>Volunteer at local refugee shelters and hospitals.</li>
-                <li>Share our message to raise awareness of the refugee crisis.</li>
-                <li>Support projects that create sustainable living conditions for refugees.</li>
-            </ul>
-            <a href="#donate" class="btn">Contribute Now</a>
-        </div>
-
-        <div class="card">
-            <h3>Food Aid</h3>
-            <p>We provide essential food packages to refugees, ensuring they have access to the nutrition they need to survive and thrive. Our food assistance program includes fresh produce, non-perishable items, and clean water.</p>
-        </div>
-
-        <div class="card">
-            <h3>Medical Aid</h3>
-            <p>Our medical aid programs deliver emergency healthcare, essential medical supplies, and set up mobile clinics for refugees. From treating injuries to providing ongoing health support, we are committed to improving refugee well-being.</p>
-        </div>
-
-        <div id="donate" class="card">
-            <h3>Donate to Refugee Aid</h3>
-            <p>Your donations help us provide food, medicine, and healthcare to refugees. Every contribution makes a lasting impact on their lives.</p>
-            <a href="https://www.donate-link.com" class="btn">Donate Now</a>
-        </div>
-    </div>
-
-    <!-- Testimonials Section -->
-    <div class="testimonials">
-        <h2>What People Are Saying</h2>
-        <div class="testimonial">
-            <p>"Thanks to your support, we were able to provide food and medical aid to families in desperate need. You are truly making a difference."</p>
-            <p class="author">- Sarah T., Volunteer</p>
-        </div>
-        <div class="testimonial">
-            <p>"I can't express how thankful we are for the support. It helped us get through some of the toughest times as refugees."</p>
-            <p class="author">- Ahmed M., Refugee</p>
-        </div>
-    </div>
-
-    <!-- Recent Projects Section -->
-    <div class="recent-projects">
-        <h2>Our Recent Projects</h2>
-        <div class="recent-project">
-           
-            <h3>Emergency Relief in Syria</h3>
-            <p>We provided emergency food and medical supplies to refugee camps in northern Syria.</p>
-        </div>
-        <div class="recent-project">
-            
-            <h3>Mobile Health Clinics in Greece</h3>
-            <p>We set up mobile health clinics to provide medical care to refugees on the Greek islands.</p>
-        </div>
-    </div>
-
-    <!-- FAQs Section -->
-    <div class="faq">
-        <h2>Frequently Asked Questions</h2>
-        <ul>
-            <li>Q: How can I donate to your cause?</li>
-            <li>A: You can donate directly through our website using the donation link provided.</li>
-            <li>Q: Can I volunteer to help?</li>
-            <li>A: Yes! We welcome volunteers to help with various projects. Please contact us for more information.</li>
-            <li>Q: Where do you operate?</li>
-            <li>A: We provide aid to refugees across various countries, including Syria, Greece, and Lebanon.</li>
-        </ul>
-    </div>
-
-    <!-- Partners Section -->
-    <div class="partners">
-        <h2>Our Partners</h2>
-        <p>We work with various organizations to bring essential support to refugees.</p>
+<div class="nav-links">
+        <a href="#about">About Us</a>
+        <a href="#faq">FAQs</a>
+        <a href="#contact">Contact Us</a>
+        <a href="login.html">Login </a>
+        <a href="#" id="logoutLink">Logout</a>
         
     </div>
-
-    <!-- Get Involved Section -->
-    <div class="get-involved">
-        <h3>Get Involved and Make a Difference</h3>
-        <p>Join us in providing essential support to refugees. Whether you donate, volunteer, or help spread the word, every action counts.</p>
-        <a href="#donate" class="btn">Join Us</a>
+    <div class="grid-container">
+        <div class="section">
+            <a href="chatbots.html">🤖 AI Chatbot</a>
+            <p>Get instant support and answers to your questions using our AI-powered chatbot.</p>
+        </div>
+        <div class="section">
+            <a href="job2.html">⚖️ Law & Job Info Hub</a>
+            <p>Find legal assistance and job opportunities tailored for refugees.</p>
+        </div>
+        <div class="section">
+            <a href="food.html">🍲 Food & Medical Aid Locator</a>
+            <p>Locate food banks and medical aid services near you.</p>
+        </div>
+        <div class="section">
+            <h2>📰 Latest Reports on Refugees</h2>
+            <p>Stay updated with the latest reports on refugees in India and Gaza from reputable newspapers.</p>
+        </div>
     </div>
+    <div class="news-container">
+        <div class="news-heading">Latest Reports</div>
+        <div class="news-box-container">
+            <div class="news-box india-news">
+                <h3>Refugee Crisis in India</h3>
+                <p><strong>Recent Headline:</strong> [Insert India's latest news headline here]</p>
+            </div>
+            <div class="news-box gaza-news">
+                <h3>Refugee Crisis in Gaza</h3>
+                <p><strong>Recent Headline:</strong> [Insert Gaza's latest news headline here]</p>
+            </div>
+        </div>
+    </div>
+ <div class="who-is-refugee">
+        <h2>Who is a Refugee?</h2>
+        <p>The 1951 convention defines a refugee as a “person who is outside his or her country of nationality or habitual residence; has a well-founded fear of being persecuted because of his or her race, religion, nationality, membership of a particular social group or political opinion; and is unable or unwilling to avail him— or herself of the protection of that country, or to return there, for fear of persecution.”</p>
+    </div>
+<div class="contact-us" id="contact">
+        <h2>Contact Us</h2>
+        <p>Email: support@umeed.org     |    Phone: +91 12345 67890    |    Adress: 123 Refugee Aid Street, Delhi, India </p>
+           </div>
+    <div class="contact-us" id="faq">
+        <h2>Frequently Asked Questions</h2>
+        <p><strong>Q: How can I apply for refugee aid?</strong></p>
+        <p>A: You can visit our Law & Job Info Hub to find details on eligibility and application processes.</p>
+        <p><strong>Q: What are my rights as a refugee?</strong></p>
+        <p>A: As a refugee, you have the right to seek asylum, to be protected from being sent back to a country where you are at risk, and to have access to basic necessities like food, shelter, and healthcare.</p>
+        <p><strong>Q: Who is eligible for resettlement?</strong> </p>
+        <p>A: Resettlement is generally offered to refugees who are in dire circumstances and who are unable to return to their home country or find a safe solution in another country.
+How do I apply for resettlement? </P>
+        <P><strong>Q: How do I apply for resettlement?</strong> </P>
+        <P>A: You typically do not apply for resettlement directly, but rather, UNHCR or other organizations identify individuals who are in need of resettlement and refer them to resettlement countries. </P>
+    </div>
+    <div class="about-us" id="about-us">
+        <h2>About Us</h2>
+        <p>"UMEED Refugee Support exists to build bridges between refugees and the resources they need to rebuild their lives. This website is meant to be a place to find necessary aid, get legal and job information, and to have a starting point for any questions that a refugee may have. By use of an AI chatbot, and by gathering crucial information, we are aiming to create a helpful space for those in need."</p>
+    </div>
+    <div class="footer">&copy; 2025 UMEED Refugee Support | Helping Hands, Brighter Futures</div>
+    <script src="https://www.gstatic.com/firebasejs/9.6.1/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.6.1/firebase-auth-compat.js"></script>
+    <script>
 
-    <footer class="footer">
-        <p>&copy; 2025 Refugee Support - Food & Medical Aid | All Rights Reserved</p>
-    </footer>
 
+            const firebaseConfig = {
+            apiKey: "AIzaSyCcoozZQWTAI_1g_E0tjlXk6dateBJCeU0",
+            authDomain: "refugee-support-26a83.firebaseapp.com",
+            projectId: "refugee-support-26a83",
+            storageBucket: "refugee-support-26a83.firebasestorage.app",
+            messagingSenderId: "476368770087",
+            appId: "1:476368770087:web:8d7e98f5220d7e572a6a02"
+            };
+
+
+        firebase.initializeApp(firebaseConfig);
+        const auth = firebase.auth();
+
+
+        const logoutLink = document.getElementById('logoutLink');
+
+
+        logoutLink.addEventListener('click', (event) => {
+            event.preventDefault();
+
+
+            firebase.auth().signOut()
+                .then(() => {
+                 
+                    localStorage.removeItem('chatHistory');
+
+
+                    alert('Logged out successfully!');
+                    window.location.href = 'index.html';
+                })
+                .catch((error) => {
+                    console.error('Logout error:', error);
+                    alert('Logout failed. Please try again.');
+                });
+        });
+    </script>
 </body>
 </html>
+ 
+
+
