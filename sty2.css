@@ -1,0 +1,218 @@
+/* Global Styles */
+body {
+    font-family: 'Roboto', sans-serif;
+    background-image: url('https://cmsny.org/wp-content/uploads/2022/10/shutterstock_2025653747.jpg');
+    background-size: cover;
+    background-position: center;
+    background-attachment: fixed;
+    color: #333;
+    margin: 0;
+    padding: 0;
+}
+
+header {
+    text-align: center;
+    background-color:orange;
+    color: white;
+    padding: 2rem;
+    background-image: url('');
+    background-size: cover;
+    background-position: center;
+    font-family: 'Arial', sans-serif;
+}
+
+header h1 {
+    font-size: 3.5rem;
+    letter-spacing: 1.5px;
+    margin: 0;
+    font-family: 'Montserrat', sans-serif;
+}
+
+header p {
+    font-size: 1.6rem;
+    margin: 1rem 0;
+    font-family: 'Verdana', sans-serif;
+}
+
+.fade-in-section {
+    padding: 4rem;
+    background-color: rgba(255, 255, 255, 0.9);
+    margin: 3rem auto;
+    text-align: center;
+    border-radius: 10px;
+    max-width: 70%;
+    box-shadow: 0 6px 15px rgba(0, 0, 0, 0.1);
+    font-family: 'Times New Roman', serif;
+}
+
+.fade-in-section h2 {
+    font-size: 2.8rem;
+    color: #34495e;
+    font-family: 'Poppins', sans-serif;
+}
+
+.fade-in-section p {
+    font-size: 1.5rem;
+    color: #555;
+    font-family: 'Georgia', serif;
+}
+
+.job-cards {
+    display: flex;
+    justify-content: space-around;
+    flex-wrap: wrap;
+    margin-top: 2rem;
+    gap: 2rem;
+}
+
+.job-card {
+    width: 28%;
+    padding: 2.5rem;
+    background-color: rgba(223, 249, 251, 0.8);
+    border-radius: 10px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s, background-color 0.3s;
+    cursor: pointer;
+    font-family: 'Lato', sans-serif;
+}
+
+.job-card:hover {
+    transform: scale(1.05);
+    background-color: #7ed6df;
+}
+
+.job-card h3 {
+    font-size: 1.8rem;
+    color: #130f40;
+    font-family: 'Helvetica', sans-serif;
+}
+
+.job-card p {
+    font-size: 1.2rem;
+    color: #333;
+    font-family: 'Petunia', monospace; /* Changed to Petunia */
+}
+
+.guidance {
+    background-color: rgba(106, 176, 76, 0.9);
+    padding: 2rem;
+    color: white;
+    text-align: center;
+    border-radius: 10px;
+    margin: 3rem auto;
+    position: relative;
+    overflow: hidden;
+    font-family: 'Comic Sans MS', cursive;
+}
+
+.guidance button {
+    padding: 1rem 1rem;
+    background-color: #badc58;
+    color: white;
+    border: none;
+    font-size: 1.4rem;
+    cursor: pointer;
+    border-radius: 8px;
+    transition: background-color 0.3s, transform 0.3s;
+    animation: pulse 1.5s infinite;
+}
+
+.guidance button:hover {
+    background-color: #44bd32;
+    transform: scale(1.05);
+}
+
+/* Pulse Animation for Button */
+@keyframes pulse {
+    0% {
+        transform: scale(1);
+        box-shadow: 0 0 5px rgba(0, 0, 0, 0.2);
+    }
+    50% {
+        transform: scale(1.05);
+        box-shadow: 0 0 15px rgba(0, 0, 0, 0.3);
+    }
+    100% {
+        transform: scale(1);
+        box-shadow: 0 0 5px rgba(0, 0, 0, 0.2);
+    }
+}
+
+.hope {
+    text-align: center;
+    padding: 3rem;
+    background-color: rgba(255, 190, 118, 0.9);
+    color: #333;
+    border-radius: 10px;
+    margin: 3rem auto;
+    font-family: 'Poppins', sans-serif;
+}
+
+.hope h2 {
+    font-size: 2.5rem;
+    color: #f0932b;
+    font-family: 'Impact', sans-serif;
+}
+
+.hope-message {
+    font-size: 1.8rem;
+    font-family: 'Trebuchet MS', sans-serif;
+}
+
+
+
+@media (max-width: 768px) {
+    .legal-cards {
+        flex-direction: column;
+    }
+}
+.legal-cards {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    gap: 1rem; /* Adjust spacing between cards */
+}
+
+.job-card1 {
+    flex: 1;
+    padding: 2rem;
+    background-color: #d1e7ff; /* Light blue background */
+    border-radius: 10px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s, background-color 0.3s;
+    cursor: pointer;
+    text-align: center;
+}
+
+.job-card1:hover {
+    background-color: #7fbfff; /* Darker blue on hover */
+    transform: scale(1.05);
+}
+
+/* Responsive design for smaller screens */
+@media (max-width: 768px) {
+    .legal-cards {
+        flex-direction: column;
+    }
+    .job-card1 {
+        width: 100%;
+        margin-bottom: 1rem;
+    }
+}
+
+
+footer {
+    text-align: center;
+    padding: 0.5rem;
+    background-color: #4a69bd;
+    color: white;
+    font-family: 'Montserrat', sans-serif;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .job-card {
+        width: 100%;
+        margin-bottom: 2rem;
+    }
+}
