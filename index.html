@@ -178,6 +178,7 @@ a{
         <a href="#faq">FAQs</a>
         <a href="#contact">Contact Us</a>
         <a href="login.html">Login </a>
+        <a href="#" id="logoutLink">Logout</a>
     </div>
     <div class="grid-container">
         <div class="section">
@@ -235,5 +236,40 @@ How do I apply for resettlement? </P>
         <p>"UMEED Refugee Support exists to build bridges between refugees and the resources they need to rebuild their lives. This website is meant to be a place to find necessary aid, get legal and job information, and to have a starting point for any questions that a refugee may have. By use of an AI chatbot, and by gathering crucial information, we are aiming to create a helpful space for those in need."</p>
     </div>
     <div class="footer">&copy; 2025 UMEED Refugee Support | Helping Hands, Brighter Futures</div>
+    <script src="https://www.gstatic.com/firebasejs/9.6.1/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.6.1/firebase-auth-compat.js"></script>
+    <script>
+
+            const firebaseConfig = {
+            apiKey: "AIzaSyCcoozZQWTAI_1g_E0tjlXk6dateBJCeU0",
+            authDomain: "refugee-support-26a83.firebaseapp.com",
+            projectId: "refugee-support-26a83",
+            storageBucket: "refugee-support-26a83.firebasestorage.app",
+            messagingSenderId: "476368770087",
+            appId: "1:476368770087:web:8d7e98f5220d7e572a6a02"
+            };
+
+        firebase.initializeApp(firebaseConfig);
+        const auth = firebase.auth();
+
+        const logoutLink = document.getElementById('logoutLink');
+
+        logoutLink.addEventListener('click', (event) => {
+            event.preventDefault();
+
+            firebase.auth().signOut()
+                .then(() => {
+                 
+                    localStorage.removeItem('chatHistory');
+
+                    alert('Logged out successfully!');
+                    window.location.href = 'index.html';
+                })
+                .catch((error) => {
+                    console.error('Logout error:', error);
+                    alert('Logout failed. Please try again.');
+                });
+        });
+    </script>
 </body>
 </html>
