@@ -6,7 +6,7 @@
     <title>UMEED Refugee Support</title>
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap');
-       
+
         body {
             font-family: 'Poppins', sans-serif;
             margin: 0;
@@ -69,9 +69,7 @@
         }
 
 
-
-
-         .who-is-refugee, .about-us {
+        .who-is-refugee, .about-us {
             background-color: rgba(240, 240, 240, 0.7);
             padding: 20px;
             border-radius: 10px;
@@ -79,8 +77,8 @@
             text-align: center;
             width: 80%;
             margin: 20px 0;}
-           
- .contact-us {
+
+        .contact-us {
             background-color: rgba(240, 240, 240, 0.7);
             padding: 20px;
             border-radius: 10px;
@@ -166,10 +164,9 @@
             width: 100%;
         }
 a{
-        color: black;
+            color: black;
 }
     </style>
-    <meta name="google-site-verification" content="RJpPzTXu9aXQosxaiqMEaHlErvLU3PUdVjJL4W1iV78" />
 </head>
 <body>
     <header>UMEED Refugee Support</header>
@@ -182,7 +179,7 @@ a{
         <a href="#contact">Contact Us</a>
         <a href="login.html">Login </a>
         <a href="#" id="logoutLink">Logout</a>
-        
+
     </div>
     <div class="grid-container">
         <div class="section">
@@ -198,7 +195,7 @@ a{
             <p>Locate food banks and medical aid services near you.</p>
         </div>
         <div class="section">
-            <a href="https://www.theguardian.com/world/refugees">📰 Latest Reports on Refugees</a>
+            <a href="">📰 Latest Reports on Refugees</a>
             <p>Stay updated with the latest reports on refugees in India and Gaza from reputable newspapers.</p>
         </div>
     </div>
@@ -215,14 +212,14 @@ a{
             </div>
         </div>
     </div>
- <div class="who-is-refugee">
+<div class="who-is-refugee">
         <h2>Who is a Refugee?</h2>
         <p>The 1951 convention defines a refugee as a “person who is outside his or her country of nationality or habitual residence; has a well-founded fear of being persecuted because of his or her race, religion, nationality, membership of a particular social group or political opinion; and is unable or unwilling to avail him— or herself of the protection of that country, or to return there, for fear of persecution.”</p>
     </div>
 <div class="contact-us" id="contact">
         <h2>Contact Us</h2>
-        <p>Email: support@umeed.org      |    Phone: +91 12345 67890    |    Adress: 123 Refugee Aid Street, Delhi, India </p>
-           </div>
+        <p>Email: support@umeed.org    |    Phone: +91 12345 67890    |    Adress: 123 Refugee Aid Street, Delhi, India </p>
+            </div>
     <div class="contact-us" id="faq">
         <h2>Frequently Asked Questions</h2>
         <p><strong>Q: How can I apply for refugee aid?</strong></p>
@@ -243,46 +240,40 @@ How do I apply for resettlement? </P>
     <script src="https://www.gstatic.com/firebasejs/9.6.1/firebase-app-compat.js"></script>
     <script src="https://www.gstatic.com/firebasejs/9.6.1/firebase-auth-compat.js"></script>
     <script>
+        async function fetchFirebaseConfig() {
+            try {
+                const response = await fetch('http://localhost:3000/firebaseconfig');
+                if (!response.ok) {
+                    throw new Error(`HTTP error! status: ${response.status}`);
+                }
+                const config = await response.json();
+                firebase.initializeApp(config);
+                const auth = firebase.auth();
 
+                const logoutLink = document.getElementById('logoutLink');
 
-            const firebaseConfig = {
-            apiKey: "AIzaSyCcoozZQWTAI_1g_E0tjlXk6dateBJCeU0",
-            authDomain: "refugee-support-26a83.firebaseapp.com",
-            projectId: "refugee-support-26a83",
-            storageBucket: "refugee-support-26a83.firebasestorage.app",
-            messagingSenderId: "476368770087",
-            appId: "1:476368770087:web:8d7e98f5220d7e572a6a02"
-            };
+                logoutLink.addEventListener('click', (event) => {
+                    event.preventDefault();
 
-
-        firebase.initializeApp(firebaseConfig);
-        const auth = firebase.auth();
-
-
-        const logoutLink = document.getElementById('logoutLink');
-
-
-        logoutLink.addEventListener('click', (event) => {
-            event.preventDefault();
-
-
-            firebase.auth().signOut()
-                .then(() => {
-                 
-                    localStorage.removeItem('chatHistory');
-
-
-                    alert('Logged out successfully!');
-                    window.location.href = 'index.html';
-                })
-                .catch((error) => {
-                    console.error('Logout error:', error);
-                    alert('Logout failed. Please try again.');
+                    firebase.auth().signOut()
+                        .then(() => {
+                            localStorage.removeItem('chatHistory');
+                            alert('Logged out successfully!');
+                            window.location.href = 'index.html';
+                        })
+                        .catch((error) => {
+                            console.error('Logout error:', error);
+                            alert('Logout failed. Please try again.');
+                        });
                 });
-        });
+
+            } catch (error) {
+                console.error('Error fetching Firebase config:', error);
+                alert('Failed to load Firebase configuration. Please try again later.');
+            }
+        }
+
+        fetchFirebaseConfig();
     </script>
 </body>
 </html>
- 
-
-

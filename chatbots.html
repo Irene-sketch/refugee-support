@@ -17,7 +17,7 @@
                 align-items: center;
                 min-height: 100vh;
             }
-    
+
             .chat-container {
                 width: 90%;
                 max-width: 500px;
@@ -28,7 +28,7 @@
                 display: flex;
                 flex-direction: column;
             }
-    
+
             .chat-header {
                 background-color: #f29c47;
                 color: white;
@@ -37,7 +37,7 @@
                 font-size: 1.2em;
                 font-weight: 600;
             }
-    
+
             .chatbox {
                 flex-grow: 1;
                 overflow-y: auto;
@@ -45,7 +45,7 @@
                 display: flex;
                 flex-direction: column;
             }
-    
+
             .chat-message {
                 padding: 12px 18px;
                 margin-bottom: 10px;
@@ -54,25 +54,25 @@
                 clear: both;
                 line-height: 1.6;
             }
-    
+
             .user-message {
                 background-color: #f6a249;
                 align-self: flex-end;
                 color: #333;
             }
-    
+
             .bot-message {
                 background-color: #d5f5dc;
                 align-self: flex-start;
                 color: #333;
             }
-    
+
             .input-container {
                 display: flex;
                 padding: 15px;
                 border-top: 1px solid #eee;
             }
-    
+
             input {
                 flex-grow: 1;
                 padding: 12px;
@@ -81,7 +81,7 @@
                 font-size: 16px;
                 margin-right: 10px;
             }
-    
+
             button {
                 padding: 12px 20px;
                 background: #f6a249;
@@ -92,7 +92,7 @@
                 font-size: 16px;
                 transition: background-color 0.3s ease;
             }
-    
+
             button:hover {
                 background: #035f03;
             }
@@ -102,126 +102,132 @@
    <script src="https://www.gstatic.com/firebasejs/9.6.1/firebase-firestore-compat.js"></script>
 </head>
 <body>
-   <div class="chat-container">
-       <div class="chat-header">Refugee Support Chatbot<br>Want to save your chat? Log in and pick up where you left off.</div>
-       <div id="chatbox" class="chatbox"></div>
-       <div class="input-container">
-           <input type="text" id="userInput" placeholder="Ask me anything...">
-           <button onclick="sendMessage()">Send</button>
-       </div>
-   </div>
-   <script>
-       // Firebase Configuration
-       const firebaseConfig = {
-           apiKey: "AIzaSyCcoozZQWTAI_1g_E0tjlXk6dateBJCeU0",
-           authDomain: "refugee-support-26a83.firebaseapp.com",
-           projectId: "refugee-support-26a83",
-           storageBucket: "refugee-support-26a83.firebasestorage.app",
-           messagingSenderId: "476368770087",
-           appId: "1:476368770087:web:8d7e98f5220d7e572a6a02"
-       };
+    <div class="chat-container">
+        <div class="chat-header">Refugee Support Chatbot<br>Want to save your chat? Log in and pick up where you left off.</div>
+        <div id="chatbox" class="chatbox"></div>
+        <div class="input-container">
+            <input type="text" id="userInput" placeholder="Ask me anything...">
+            <button onclick="sendMessage()">Send</button>
+        </div>
+    </div>
+    <script>
+        let firebaseConfig;
 
-       firebase.initializeApp(firebaseConfig);
-       const auth = firebase.auth();
-       const db = firebase.firestore();
-       const API_KEY = "AIzaSyBGjm7iZ1l6wFffs5BtHy0ruHWtuBQB7Yw";
+        async function fetchConfigs() {
+            try {
+                const firebaseResponse = await fetch('http://localhost:3000/firebaseconfig');
+                if (!firebaseResponse.ok) {
+                    throw new Error(`HTTP error! status: ${firebaseResponse.status}`);
+                }
+                firebaseConfig = await firebaseResponse.json();
 
-       let conversationHistory = [];
-       let user;
+                firebase.initializeApp(firebaseConfig);
+                const auth = firebase.auth();
+                const db = firebase.firestore();
 
-       auth.onAuthStateChanged(async (currentUser) => {
-           user = currentUser;
-           if (user) {
-               await loadChatHistory();
-               transferLocalStorageToFirestore(); //transfer local storage data.
-           } else {
-               loadLocalStorageHistory();
-           }
-       });
+                let conversationHistory = [];
+                let user;
 
-       function loadLocalStorageHistory() {
-           const chatbox = document.getElementById("chatbox");
-           chatbox.innerHTML = "";
-           conversationHistory = JSON.parse(localStorage.getItem('chatHistory')) || [];
-           conversationHistory.forEach(message => {
-               const className = message.role === "user" ? "user-message" : "bot-message";
-               const sender = message.role === "user" ? "You" : "Bot";
-               chatbox.innerHTML += `<div class="chat-message ${className}"><b>${sender}:</b> ${message.parts[0].text}</div>`;
-           });
-           chatbox.scrollTop = chatbox.scrollHeight;
-       }
+                auth.onAuthStateChanged(async (currentUser) => {
+                    user = currentUser;
+                    if (user) {
+                        await loadChatHistory();
+                        transferLocalStorageToFirestore(); //transfer local storage data.
+                    } else {
+                        loadLocalStorageHistory();
+                    }
+                });
 
-       async function loadChatHistory() {
-           if (!user) return;
-           const chatbox = document.getElementById("chatbox");
-           chatbox.innerHTML = "";
-           conversationHistory = [];
+                function loadLocalStorageHistory() {
+                    const chatbox = document.getElementById("chatbox");
+                    chatbox.innerHTML = "";
+                    conversationHistory = JSON.parse(localStorage.getItem('chatHistory')) || [];
+                    conversationHistory.forEach(message => {
+                        const className = message.role === "user" ? "user-message" : "bot-message";
+                        const sender = message.role === "user" ? "You" : "Bot";
+                        chatbox.innerHTML += `<div class="chat-message ${className}"><b>${sender}:</b> ${message.parts[0].text}</div>`;
+                    });
+                    chatbox.scrollTop = chatbox.scrollHeight;
+                }
 
-           try {
-               const chatDoc = await db.collection("chats").doc(user.uid).get();
-               if (chatDoc.exists) {
-                   const data = chatDoc.data();
-                   conversationHistory = data.history || [];
-                   conversationHistory.forEach(message => {
-                       const className = message.role === "user" ? "user-message" : "bot-message";
-                       const sender = message.role === "user" ? "You" : "Bot";
-                       chatbox.innerHTML += `<div class="chat-message ${className}"><b>${sender}:</b> ${message.parts[0].text}</div>`;
-                   });
-                   chatbox.scrollTop = chatbox.scrollHeight;
-               }
-           } catch (error) {
-               console.error("Error loading chat history:", error);
-               chatbox.innerHTML += `<div class="chat-message bot-message"><b>Bot:</b> This is our first chat</div>`;
-           }
-       }
+                async function loadChatHistory() {
+                    if (!user) return;
+                    const chatbox = document.getElementById("chatbox");
+                    chatbox.innerHTML = "";
+                    conversationHistory = [];
 
-       async function sendMessage() {
-           let userMessage = document.getElementById("userInput").value.trim();
-           if (!userMessage) return;
+                    try {
+                        const chatDoc = await db.collection("chats").doc(user.uid).get();
+                        if (chatDoc.exists) {
+                            const data = chatDoc.data();
+                            conversationHistory = data.history || [];
+                            conversationHistory.forEach(message => {
+                                const className = message.role === "user" ? "user-message" : "bot-message";
+                                const sender = message.role === "user" ? "You" : "Bot";
+                                chatbox.innerHTML += `<div class="chat-message ${className}"><b>${sender}:</b> ${message.parts[0].text}</div>`;
+                            });
+                            chatbox.scrollTop = chatbox.scrollHeight;
+                        }
+                    } catch (error) {
+                        console.error("Error loading chat history:", error);
+                        chatbox.innerHTML += `<div class="chat-message bot-message"><b>Bot:</b> This is our first chat</div>`;
+                    }
+                }
 
-           let chatbox = document.getElementById("chatbox");
-           chatbox.innerHTML += `<div class="chat-message user-message"><b>You:</b> ${userMessage}</div>`;
-           document.getElementById("userInput").value = "";
+                window.sendMessage = async function() { // Make sendMessage accessible globally
+                    let userMessage = document.getElementById("userInput").value.trim();
+                    if (!userMessage) return;
 
-           conversationHistory.push({ role: "user", parts: [{ text: userMessage }] });
+                    let chatbox = document.getElementById("chatbox");
+                    chatbox.innerHTML += `<div class="chat-message user-message"><b>You:</b> ${userMessage}</div>`;
+                    document.getElementById("userInput").value = "";
 
-           try {
-               let response = await fetch(`https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-pro:generateContent?key=${API_KEY}`, {
-                   method: "POST",
-                   headers: { "Content-Type": "application/json" },
-                   body: JSON.stringify({ contents: conversationHistory })
-               });
-               let data = await response.json();
-               let botReply = data?.candidates?.[0]?.content?.parts?.[0]?.text || "I'm sorry, I don't understand.";
-               chatbox.innerHTML += `<div class="chat-message bot-message"><b>Bot:</b> ${botReply}</div>`;
-               conversationHistory.push({ role: "model", parts: [{ text: botReply }] });
+                    conversationHistory.push({ role: "user", parts: [{ text: userMessage }] });
 
-               if (user) {
-                   await db.collection("chats").doc(user.uid).set({ history: conversationHistory });
-               } else {
-                   localStorage.setItem('chatHistory', JSON.stringify(conversationHistory));
-               }
-               chatbox.scrollTop = chatbox.scrollHeight;
+                    try {
+                        const response = await fetch('http://localhost:3000/gemini', { // Call your server's /gemini endpoint
+                            method: "POST",
+                            headers: { "Content-Type": "application/json" },
+                            body: JSON.stringify({ conversationHistory: conversationHistory })
+                        });
+                        const data = await response.json();
+                        const botReply = data?.candidates?.[0]?.content?.parts?.[0]?.text || "I'm sorry, I don't understand.";
+                        chatbox.innerHTML += `<div class="chat-message bot-message"><b>Bot:</b> ${botReply}</div>`;
+                        conversationHistory.push({ role: "model", parts: [{ text: botReply }] });
 
-           } catch (error) {
-               console.error("Error:", error);
-               chatbox.innerHTML += `<div class="chat-message bot-message"><b>Bot:</b> Oops! Something went wrong.</div>`;
-           }
-       }
+                        if (user) {
+                            await db.collection("chats").doc(user.uid).set({ history: conversationHistory });
+                        } else {
+                            localStorage.setItem('chatHistory', JSON.stringify(conversationHistory));
+                        }
+                        chatbox.scrollTop = chatbox.scrollHeight;
 
-       async function transferLocalStorageToFirestore() {
-           if (!user) return;
-           const localHistory = JSON.parse(localStorage.getItem('chatHistory')) || [];
-           if (localHistory.length > 0) {
-               try {
-                   await db.collection("chats").doc(user.uid).set({ history: localHistory });
-                   localStorage.removeItem('chatHistory');
-               } catch (error) {
-                   console.error("Error transferring local storage data:", error);
-               }
-           }
-       }
+                    } catch (error) {
+                        console.error("Error:", error);
+                        chatbox.innerHTML += `<div class="chat-message bot-message"><b>Bot:</b> Oops! Something went wrong.</div>`;
+                    }
+                }
 
-   </script>
+                async function transferLocalStorageToFirestore() {
+                    if (!user) return;
+                    const localHistory = JSON.parse(localStorage.getItem('chatHistory')) || [];
+                    if (localHistory.length > 0) {
+                        try {
+                            await db.collection("chats").doc(user.uid).set({ history: localHistory });
+                            localStorage.removeItem('chatHistory');
+                        } catch (error) {
+                            console.error("Error transferring local storage data:", error);
+                        }
+                    }
+                }
+
+            } catch (error) {
+                console.error('Error fetching configurations:', error);
+                alert('Failed to load configurations. Please try again later.');
+            }
+        }
+
+        fetchConfigs();
+    </script>
 </body>
 </html>
