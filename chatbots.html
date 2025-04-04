@@ -115,7 +115,7 @@
 
         async function fetchConfigs() {
             try {
-                const firebaseResponse = await fetch('http://localhost:3000/firebaseconfig');
+                const firebaseResponse = await fetch('https://refugee-support.onrender.com/firebaseconfig');
                 if (!firebaseResponse.ok) {
                     throw new Error(`HTTP error! status: ${firebaseResponse.status}`);
                 }
@@ -185,7 +185,7 @@
                     conversationHistory.push({ role: "user", parts: [{ text: userMessage }] });
 
                     try {
-                        const response = await fetch('http://localhost:3000/gemini', { // Call your server's /gemini endpoint
+                        const response = await fetch('https://refugee-support.onrender.com/gemini', { // Call your server's /gemini endpoint
                             method: "POST",
                             headers: { "Content-Type": "application/json" },
                             body: JSON.stringify({ conversationHistory: conversationHistory })
