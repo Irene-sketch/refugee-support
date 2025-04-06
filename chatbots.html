@@ -172,39 +172,49 @@
                 }
             }
 
-            window.sendMessage = async function() { // Make sendMessage accessible globally
-                let userMessage = document.getElementById("userInput").value.trim();
-                if (!userMessage) return;
+ window.sendMessage = async function() {
+  let userMessage = document.getElementById("userInput").value.trim();
+  if (!userMessage) return;
 
-                let chatbox = document.getElementById("chatbox");
-                chatbox.innerHTML += `<div class="chat-message user-message"><b>You:</b> ${userMessage}</div>`;
-                document.getElementById("userInput").value = "";
+  const chatbox = document.getElementById("chatbox");
+  // Append the raw message to the chat display
+  chatbox.innerHTML += `<div class="chat-message user-message"><b>You:</b> ${userMessage}</div>`;
+  document.getElementById("userInput").value = "";
 
-                conversationHistory.push({ role: "user", parts: [{ text: userMessage }] });
+  // Store the raw message in conversation history
+  conversationHistory.push({ role: "user", parts: [{ text: userMessage }] });
 
-                try {
-                    const response = await fetch('https://refugee-support.onrender.com/gemini', { // Call your server's /gemini endpoint
-                        method: "POST",
-                        headers: { "Content-Type": "application/json" },
-                        body: JSON.stringify({ conversationHistory: conversationHistory })
-                    });
-                    const data = await response.json();
-                    const botReply = data?.candidates?.[0]?.content?.parts?.[0]?.text || "I'm sorry, I don't understand.";
-                    chatbox.innerHTML += `<div class="chat-message bot-message"><b>Bot:</b> ${botReply}</div>`;
-                    conversationHistory.push({ role: "model", parts: [{ text: botReply }] });
+  // Create a modified message only for sending to Gemini
+  const modifiedMessage = "Only answer if the user’s message is clearly related to refugee support (e.g. asylum, displaced persons, humanitarian aid, resettlement, education, employment, legal rights, health, etc. in a refugee context). You may also respond to polite greetings like “hi” or “hello” with a friendly welcome message. If the message is unrelated to refugee support or greetings, politely decline to answer and explain that you only assist with refugee-related topics. :" + userMessage;
+  
+  // Make a shallow copy of conversationHistory for sending,
+  // replacing the last message with the modified version
+  let conversationToSend = conversationHistory.slice();
+  conversationToSend[conversationToSend.length - 1] = { role: "user", parts: [{ text: modifiedMessage }] };
 
-                    if (user) {
-                        await db.collection("chats").doc(user.uid).set({ history: conversationHistory });
-                    } else {
-                        localStorage.setItem('chatHistory', JSON.stringify(conversationHistory));
-                    }
-                    chatbox.scrollTop = chatbox.scrollHeight;
+  try {
+    const response = await fetch('https://refugee-support.onrender.com/gemini', {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ conversationHistory: conversationToSend })
+    });
+    const data = await response.json();
+    const botReply = data?.candidates?.[0]?.content?.parts?.[0]?.text || "I'm sorry, I don't understand.";
+    chatbox.innerHTML += `<div class="chat-message bot-message"><b>Bot:</b> ${botReply}</div>`;
+    conversationHistory.push({ role: "model", parts: [{ text: botReply }] });
+    
+    if (user) {
+      await db.collection("chats").doc(user.uid).set({ history: conversationHistory });
+    } else {
+      localStorage.setItem('chatHistory', JSON.stringify(conversationHistory));
+    }
+    chatbox.scrollTop = chatbox.scrollHeight;
+  } catch (error) {
+    console.error("Error:", error);
+    chatbox.innerHTML += `<div class="chat-message bot-message"><b>Bot:</b> Oops! Something went wrong.</div>`;
+  }
+}
 
-                } catch (error) {
-                    console.error("Error:", error);
-                    chatbox.innerHTML += `<div class="chat-message bot-message"><b>Bot:</b> Oops! Something went wrong.</div>`;
-                }
-            }
 
             async function transferLocalStorageToFirestore() {
                 if (!user) return;
