@@ -25,8 +25,11 @@ const client = ModelClient(endpoint, new AzureKeyCredential(token));
 app.post('/mistral', async (req, res) => {
     try {
         const userMessage = req.body.message;
+        console.log("Sending request to Mistral with token present:", !!token);
+        console.log("Model:", model);
+        console.log("User message:", userMessage);
 
-        const response = await client.path("/mistral/completions").post({
+        const response = await client.path("/chat/completions").post({
             body: {
                 messages: [
                     {
@@ -53,23 +56,15 @@ app.post('/mistral', async (req, res) => {
         res.json({ reply });
 
     } catch (err) {
-        console.error("Mistral API Error:", err);
-        res.status(500).json({ error: 'Error communicating with Mistral model.' });
+        console.error("Mistral API Error (full):", err);
+
+        if (err && err.response && err.response.body) {
+            console.error("Mistral API Error (body):", JSON.stringify(err.response.body, null, 2));
+        }
+
+        res.status(500).json({
+            error: 'Error communicating with Mistral model.',
+            details: err?.message || err?.toString() || 'Unknown error'
+        });
     }
-});
-
-// 🌐 Firebase config route (unchanged)
-app.get('/firebaseconfig', (req, res) => {
-    res.json({
-        apiKey: process.env.FIREBASE_API_KEY,
-        authDomain: process.env.FIREBASE_AUTH_DOMAIN,
-        projectId: process.env.FIREBASE_PROJECT_ID,
-        storageBucket: process.env.FIREBASE_STORAGE_BUCKET,
-        messagingSenderId: process.env.FIREBASE_MESSAGING_SENDER_ID,
-        appId: process.env.FIREBASE_APP_ID,
-    });
-});
-
-app.listen(port, () => {
-    console.log(`✅ Server listening at http://localhost:${port}`);
-});
+}); // ✅ This closing brace was missing
