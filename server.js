@@ -1,11 +1,7 @@
 const express = require('express');
 const cors = require('cors');
 require('dotenv').config();
-
-// Import the Azure-style client package
-const ModelClient = require("@azure-rest/ai-inference").default;
-const { AzureKeyCredential } = require("@azure/core-auth");
-const { isUnexpected } = require("@azure-rest/ai-inference");
+const OpenAI = require('openai'); // ✅ Import OpenAI SDK
 
 const app = express();
 const port = 3000;
@@ -14,60 +10,48 @@ app.use(cors({ origin: '*' }));
 app.use(express.json());
 app.use(express.static(__dirname));
 
-// 🧠 Mistral Model Setup
-const endpoint = "https://models.github.ai/inference";
-const model = "mistral-ai/mistral-medium-2505";
-const token = process.env.GITHUB_MODEL_TOKEN;
+// 🔐 GitHub-hosted GPT-4o Model Setup
+const token = process.env.GITHUB_MODEL_TOKEN; // your GitHub PAT
+const client = new OpenAI({
+    baseURL: "https://models.github.ai/inference", // 👈 Use GitHub Inference API
+    apiKey: token
+});
 
-const client = ModelClient(endpoint, new AzureKeyCredential(token));
-
-// 🚀 Chat endpoint (replaces Gemini)
-app.post('/mistral', async (req, res) => {
+// 🚀 Chat endpoint using GPT-4o
+app.post('/gpt4o', async (req, res) => {
     try {
         const userMessage = req.body.message;
-        console.log("Sending request to Mistral with token present:", !!token);
-        console.log("Model:", model);
-        console.log("User message:", userMessage);
+        console.log("GPT-4o User message:", userMessage);
 
-        const response = await client.path("/chat/completions").post({
-            body: {
-                messages: [
-                    {
-                        role: "system",
-                        content: "You are Umeed, a helpful assistant for refugees. You provide guidance about food, shelter, legal aid, emotional help, and jobs. Politely decline any unrelated queries."
-                    },
-                    {
-                        role: "user",
-                        content: userMessage
-                    }
-                ],
-                temperature: 0.8,
-                top_p: 0.9,
-                max_tokens: 1024,
-                model: model
-            }
+        const response = await client.chat.completions.create({
+            model: "openai/gpt-4o",
+            messages: [
+                {
+                    role: "system",
+                    content: "You are Umeed, a helpful assistant for refugees. You provide guidance about food, shelter, legal aid, emotional help, and jobs. Politely decline any unrelated queries."
+                },
+                {
+                    role: "user",
+                    content: userMessage
+                }
+            ],
+            temperature: 0.8,
+            top_p: 1,
+            max_tokens: 1024
         });
 
-        if (isUnexpected(response)) {
-            throw response.body.error;
-        }
-
-        const reply = response.body.choices[0].message.content;
+        const reply = response.choices[0].message.content;
         res.json({ reply });
 
     } catch (err) {
-        console.error("Mistral API Error (full):", err);
-
-        if (err && err.response && err.response.body) {
-            console.error("Mistral API Error (body):", JSON.stringify(err.response.body, null, 2));
-        }
-
+        console.error("GPT-4o API Error:", err);
         res.status(500).json({
-            error: 'Error communicating with Mistral model.',
+            error: 'Error communicating with GPT-4o model.',
             details: err?.message || err?.toString() || 'Unknown error'
         });
     }
-}); // ✅ This closing brace was missing
+});
+
 // 🌐 Firebase config route (unchanged)
 app.get('/firebaseconfig', (req, res) => {
     res.json({
@@ -81,5 +65,5 @@ app.get('/firebaseconfig', (req, res) => {
 });
 
 app.listen(port, () => {
-    console.log(`Server listening at http://localhost:${port}`);
+    console.log(`✅ Server listening at http://localhost:${port}`);
 });

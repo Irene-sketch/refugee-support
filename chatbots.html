@@ -186,7 +186,7 @@
           const systemMessage = `Only answer if the user’s message is clearly related to refugee support (e.g. asylum, displaced persons, humanitarian aid, resettlement, education, employment, legal rights, health, etc.). You may also respond to polite greetings like “hi” or “hello” with a friendly welcome message. If unrelated, politely decline and explain.`
 
           try {
-        const response = await fetch('https://refugee-support.onrender.com/mistral', {
+        const response = await fetch('https://refugee-support.onrender.com/gpt4o', {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
